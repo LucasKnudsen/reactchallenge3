@@ -1,17 +1,58 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class App extends React.Component {
+  state = {
+    name: '',
+    age: null
+  }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  render() {
+    const { name, age } = this.state
+
+    return (
+      <div className="App">
+        <div>
+          <h2 className="subtitle is-4">Update Data from an input</h2>
+        </div>
+
+        {/* Display Data */}
+        <div className="input-display">
+          <p>Display Name: {name}</p>
+          <p>Display Age: {age} </p>
+        </div>
+
+        {/* Collect User Inputs */}
+        <div className="inputs">
+          {/* Input name */}
+          <div className="field">
+            <label className="label">Name: </label>
+            <input
+              className="input"
+              type="text"
+              placeholder="William"
+              onChange={(event) => {this.setState({name: event.target.value})}}
+            />
+          </div>
+
+          {/* Input age */}
+          <div className="field">
+            <label className="label">Age: </label>
+            <input
+              className="input"
+              type="number"
+              placeholder="38"
+              onChange={(event) => this.setState({age: event.target.value})}
+            />
+          </div>
+        </div>
+
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+
+ReactDOM.render(<App />, rootElement);
